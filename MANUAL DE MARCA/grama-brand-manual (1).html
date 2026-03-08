@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRAMA — Design System v2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ─── BRAND ─── */
+  --g: #00C16A;
+  --g-dark: #00A359;
+  --g-deep: #007A42;
+  --g-light: #E8F7F0;
+  --g-pale:  #F0FBF5;
+
+  /* ─── DARK SIDE (sidebar / hero banners) ─── */
+  --dk-base:    #0C1D15;
+  --dk-surface: #112219;
+  --dk-card:    #162D1E;
+  --dk-border:  #1F3828;
+  --dk-text:    #D8EFE2;
+  --dk-muted:   #6B9A7A;
+
+  /* ─── LIGHT SIDE (content / forms / cards) ─── */
+  --lt-bg:      #F5F5F0;
+  --lt-surface: #FFFFFF;
+  --lt-card:    #FFFFFF;
+  --lt-border:  #E4E8E3;
+  --lt-border2: #D0D8CC;
+  --lt-text:    #1A2B20;
+  --lt-muted:   #6B7E6F;
+  --lt-subtle:  #F0F4F1;
+
+  /* ─── SEMANTIC ─── */
+  --error:   #DC2626;
+  --warning: #D97706;
+  --info:    #2563EB;
+
+  /* ─── TYPOGRAPHY ─── */
+  --fp: 'Plus Jakarta Sans', sans-serif;
+  --fm: 'DM Mono', monospace;
+
+  /* ─── SCALE ─── */
+  --tx-xs:   0.72rem;
+  --tx-sm:   0.85rem;
+  --tx-base: 1rem;
+  --tx-lg:   1.125rem;
+  --tx-xl:   1.3rem;
+  --tx-2xl:  1.6rem;
+  --tx-3xl:  2.1rem;
+  --tx-4xl:  2.8rem;
+  --tx-hero: 3.8rem;
+
+  /* ─── SPACING ─── */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px;
+  --s5:20px; --s6:24px; --s8:32px; --s10:40px;
+  --s12:48px; --s16:64px;
+
+  /* ─── RADIUS ─── */
+  --r-xs:  4px;
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  24px;
+  --r-2xl: 32px;
+  --r-full:9999px;
+
+  /* ─── SHADOWS (light context) ─── */
+  --sh-xs: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --sh-sm: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
+  --sh-md: 0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+  --sh-lg: 0 8px 32px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.07);
+  --sh-glow: 0 0 0 3px rgba(0,193,106,.2);
+  --sh-glow-btn: 0 4px 20px rgba(0,193,106,.35);
+
+  /* ─── TRANSITIONS ─── */
+  --tf: 140ms ease;
+  --tn: 220ms ease;
+  --ts: 380ms ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fp);
+  font-size: var(--tx-base);
+  line-height: 1.6;
+  background: var(--lt-bg);
+  color: var(--lt-text);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ────── SIDEBAR ────── */
+.sb {
+  width: 250px; min-width: 250px;
+  background: var(--dk-base);
+  border-right: 1px solid var(--dk-border);
+  padding: var(--s8) var(--s5);
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--s8);
+}
+.sb-logo {
+  display: flex; align-items: center; gap: var(--s3);
+  padding-bottom: var(--s6);
+  border-bottom: 1px solid var(--dk-border);
+}
+.sb-icon {
+  width: 34px; height: 34px;
+  background: var(--g);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; color: #000; font-size: 15px;
+}
+.sb-brand { font-weight: 800; font-size: .92rem; color: #fff; letter-spacing: .06em; }
+.sb-sub   { font-size: .62rem; color: var(--dk-muted); text-transform: uppercase; letter-spacing: .12em; }
+.nl { display: flex; flex-direction: column; gap: 2px; }
+.nl-h {
+  font-size: .62rem; font-weight: 700; color: var(--dk-muted);
+  text-transform: uppercase; letter-spacing: .12em;
+  padding: var(--s2) var(--s3) var(--s1);
+}
+.ni {
+  display: flex; align-items: center; gap: var(--s2);
+  padding: 7px var(--s3); border-radius: var(--r-sm);
+  color: var(--dk-muted); font-size: .82rem; font-weight: 500;
+  cursor: pointer; border: none; background: none;
+  width: 100%; text-align: left; transition: all var(--tf);
+}
+.ni:hover { background: var(--dk-border); color: var(--dk-text); }
+.ni.on    { background: rgba(0,193,106,.15); color: var(--g); }
+.ndot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+/* ────── MAIN ────── */
+.mn { flex: 1; overflow-y: auto; padding: var(--s12) var(--s12); max-width: 1000px; }
+.sec { display: none; } .sec.on { display: block; }
+
+/* ────── HERO ────── */
+.hero {
+  background: linear-gradient(135deg, var(--dk-base) 0%, #0E2A1C 60%, #123322 100%);
+  border-radius: var(--r-xl); padding: var(--s12) var(--s10);
+  margin-bottom: var(--s10); position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(0,193,106,.15) 0%, transparent 70%);
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  background: rgba(0,193,106,.12); border: 1px solid rgba(0,193,106,.25);
+  color: var(--g); font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding: 3px 10px; border-radius: var(--r-full); margin-bottom: var(--s5);
+}
+.hero h1 {
+  font-size: var(--tx-hero); font-weight: 800; line-height: 1.02;
+  color: #fff; margin-bottom: var(--s4); letter-spacing: -.025em;
+}
+.hero h1 em { font-style: normal; color: var(--g); }
+.hero p { font-size: var(--tx-lg); color: var(--dk-muted); max-width: 500px; }
+
+/* ────── SECTION TITLES ────── */
+.st  { font-size: var(--tx-3xl); font-weight: 800; color: var(--lt-text); margin-bottom: 6px; letter-spacing: -.02em; }
+.ss  { color: var(--lt-muted); margin-bottom: var(--s8); font-size: var(--tx-lg); }
+.sub {
+  font-size: var(--tx-sm); font-weight: 700; color: var(--g-dark);
+  margin: var(--s8) 0 var(--s3);
+  text-transform: uppercase; letter-spacing: .08em;
+  display: flex; align-items: center; gap: var(--s2);
+}
+.sub::before { content: ''; display: block; width: 3px; height: 12px; background: var(--g); border-radius: 2px; }
+.div { height: 1px; background: var(--lt-border); margin: var(--s10) 0; }
+
+/* ────── CARDS ────── */
+.card {
+  background: var(--lt-surface); border: 1px solid var(--lt-border);
+  border-radius: var(--r-lg); padding: var(--s6);
+  margin-bottom: var(--s4); box-shadow: var(--sh-xs);
+}
+.card-dk {
+  background: var(--dk-card); border: 1px solid var(--dk-border);
+  border-radius: var(--r-lg); padding: var(--s6); margin-bottom: var(--s4);
+}
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s4); }
+.g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: var(--s4); }
+
+/* ────── SWATCHES ────── */
+.sw-grid { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: var(--s6); }
+.sw { display: flex; flex-direction: column; gap: 6px; min-width: 100px; }
+.sw-c {
+  width: 100%; height: 72px; border-radius: var(--r-md);
+  cursor: pointer; transition: transform var(--tf); position: relative; overflow: hidden;
+}
+.sw-c:hover { transform: scale(1.04); }
+.sw-c::after {
+  content: 'COPIAR'; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.45); font-size: 9px; font-weight: 700;
+  letter-spacing: .1em; font-family: var(--fm); opacity: 0;
+  transition: opacity var(--tf); color: #fff;
+}
+.sw-c:hover::after { opacity: 1; }
+.sw-n { font-size: .7rem; font-weight: 600; color: var(--lt-text); }
+.sw-h { font-size: .68rem; color: var(--lt-muted); font-family: var(--fm); }
+
+/* ────── TYPE SCALE ────── */
+.tr {
+  display: flex; align-items: baseline; gap: var(--s6);
+  padding: 13px 0; border-bottom: 1px solid var(--lt-border);
+}
+.tm { min-width: 130px; flex-shrink: 0; }
+.tl { font-size: .68rem; color: var(--g-dark); font-family: var(--fm); font-weight: 500; }
+.ts { font-size: .66rem; color: var(--lt-muted); font-family: var(--fm); margin-top: 2px; }
+.tsamp { flex: 1; color: var(--lt-text); }
+
+/* ────── SPACING ────── */
+.spr { display: flex; align-items: center; gap: var(--s4); padding: 9px 0; border-bottom: 1px solid var(--lt-border); }
+.spb { background: var(--g); height: 7px; border-radius: 4px; opacity: .7; flex-shrink: 0; }
+.spi { display: flex; gap: var(--s6); }
+.spk { font-family: var(--fm); font-size: .68rem; color: var(--g-dark); }
+.spv { font-family: var(--fm); font-size: .68rem; color: var(--lt-muted); }
+.spdesc { font-size: .7rem; color: var(--lt-muted); }
+
+/* ────── DEMO WRAP ────── */
+.demo {
+  background: var(--lt-subtle); border: 1px solid var(--lt-border);
+  border-radius: var(--r-md); padding: var(--s6);
+  margin-bottom: var(--s4); display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap;
+}
+.demo-dk {
+  background: var(--dk-surface); border: 1px solid var(--dk-border);
+  border-radius: var(--r-md); padding: var(--s6);
+  margin-bottom: var(--s4); display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap;
+}
+.dlbl { font-size: .66rem; color: var(--lt-muted); font-family: var(--fm); margin-bottom: 6px; }
+.dlbl-dk { font-size: .66rem; color: var(--dk-muted); font-family: var(--fm); margin-bottom: 6px; }
+
+/* ────── BUTTONS ────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--fp); font-weight: 700; font-size: var(--tx-sm);
+  border: none; cursor: pointer; border-radius: var(--r-md);
+  transition: all var(--tf); text-decoration: none; white-space: nowrap;
+  padding: 9px 20px;
+}
+.btn-p {
+  background: var(--g); color: #000;
+}
+.btn-p:hover { background: var(--g-dark); transform: translateY(-1px); box-shadow: var(--sh-glow-btn); }
+
+.btn-s {
+  background: var(--lt-surface); color: var(--lt-text);
+  border: 1.5px solid var(--lt-border2);
+}
+.btn-s:hover { border-color: var(--g); color: var(--g-dark); }
+
+.btn-g {
+  background: var(--g-pale); color: var(--g-dark);
+  border: 1.5px solid rgba(0,193,106,.25);
+}
+.btn-g:hover { background: var(--g-light); }
+
+.btn-dk-s {
+  background: transparent; color: var(--dk-text);
+  border: 1.5px solid var(--dk-border);
+}
+.btn-dk-s:hover { border-color: var(--g); color: var(--g); }
+
+.btn-sm { padding: 6px 14px; font-size: var(--tx-xs); border-radius: var(--r-sm); }
+.btn-lg { padding: 13px 28px; font-size: var(--tx-base); }
+
+.btn-icon {
+  width: 36px; height: 36px; padding: 0;
+  justify-content: center; background: var(--g); color: #000;
+  border: none; border-radius: var(--r-sm); font-weight: 700; font-size: 14px;
+  cursor: pointer; transition: all var(--tf);
+}
+.btn-icon:hover { background: var(--g-dark); transform: scale(1.05); }
+
+/* ────── INPUTS ────── */
+.inp {
+  background: var(--lt-surface); border: 1.5px solid var(--lt-border2);
+  border-radius: var(--r-sm); padding: 9px 14px;
+  color: var(--lt-text); font-family: var(--fp); font-size: var(--tx-sm);
+  width: 100%; transition: border-color var(--tf), box-shadow var(--tf);
+  outline: none; box-shadow: var(--sh-xs);
+}
+.inp::placeholder { color: var(--lt-muted); }
+.inp:focus { border-color: var(--g); box-shadow: var(--sh-glow); }
+.inp-err { border-color: var(--error) !important; box-shadow: 0 0 0 3px rgba(220,38,38,.12) !important; }
+
+.sel {
+  background: var(--lt-surface); border: 1.5px solid var(--lt-border2);
+  border-radius: var(--r-sm); padding: 9px 14px;
+  color: var(--lt-text); font-family: var(--fp); font-size: var(--tx-sm);
+  width: 100%; cursor: pointer; outline: none;
+  box-shadow: var(--sh-xs); appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7E6F' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.inpw { position: relative; }
+.inpi { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--lt-muted); font-size: 14px; pointer-events: none; }
+.inp-ico { padding-left: 38px; }
+.lbl { display: block; font-size: var(--tx-sm); font-weight: 600; color: var(--lt-text); margin-bottom: 6px; }
+.inp-group { display: flex; flex-direction: column; gap: 4px; }
+
+/* ────── FILTER TABS ────── */
+.ftabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.ft {
+  padding: 6px 18px; border-radius: var(--r-full);
+  font-size: var(--tx-sm); font-weight: 600; cursor: pointer;
+  border: 1.5px solid transparent; transition: all var(--tf); font-family: var(--fp);
+}
+.ft-a { background: var(--lt-text); color: var(--lt-surface); border-color: var(--lt-text); }
+.ft-i { background: transparent; color: var(--lt-muted); border-color: var(--lt-border2); }
+.ft-i:hover { border-color: var(--g); color: var(--g-dark); }
+
+/* ────── WORKSHOP CARD (light) ────── */
+.wcard {
+  background: var(--lt-surface); border: 1px solid var(--lt-border);
+  border-radius: var(--r-lg); overflow: hidden;
+  box-shadow: var(--sh-sm); transition: all var(--tn);
+}
+.wcard:hover { box-shadow: var(--sh-lg); transform: translateY(-2px); border-color: var(--lt-border2); }
+
+/* ────── MATERIAL CARD (light, flat) ────── */
+.mcard {
+  background: var(--lt-surface); border: 1px solid var(--lt-border);
+  border-radius: var(--r-md); padding: var(--s5);
+  box-shadow: var(--sh-xs); transition: all var(--tn);
+}
+.mcard:hover { box-shadow: var(--sh-md); border-color: var(--lt-border2); }
+.m-type-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: var(--tx-xs); font-weight: 700; padding: 3px 9px;
+  border-radius: var(--r-full); margin-bottom: var(--s3);
+}
+.tag-pdf  { background: #FEF3F2; color: #DC2626; }
+.tag-vid  { background: #FFF7ED; color: #D97706; }
+.tag-3d   { background: #F5F3FF; color: #7C3AED; }
+.m-title  { font-size: var(--tx-base); font-weight: 700; color: var(--lt-text); margin-bottom: 4px; }
+.m-desc   { font-size: var(--tx-sm); color: var(--lt-muted); margin-bottom: var(--s4); }
+.m-footer { display: flex; align-items: center; justify-content: space-between; }
+
+/* ────── HERO BANNER (taller) ────── */
+.taller-hero {
+  background: linear-gradient(135deg, #0C1D15, #1A3825);
+  border-radius: var(--r-xl); padding: var(--s8) var(--s10);
+  position: relative; overflow: hidden; margin-bottom: var(--s6);
+}
+.taller-hero::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 240px;
+  background: radial-gradient(ellipse at center right, rgba(0,193,106,.08) 0%, transparent 70%);
+}
+.th-badge {
+  display: inline-block; font-size: .66rem; font-weight: 800;
+  color: var(--g); text-transform: uppercase; letter-spacing: .1em;
+  background: rgba(0,193,106,.1); padding: 3px 9px;
+  border-radius: var(--r-full); margin-bottom: var(--s3);
+}
+.th-title { font-size: var(--tx-3xl); font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -.02em; }
+.th-desc  { font-size: var(--tx-sm); color: var(--dk-muted); margin-bottom: var(--s6); max-width: 440px; }
+.th-stats { display: flex; gap: var(--s8); }
+.th-stat  { display: flex; align-items: center; gap: 7px; }
+.th-stat-icon { font-size: 15px; opacity: .7; }
+.th-stat-label { font-size: .68rem; color: var(--dk-muted); }
+.th-stat-val   { font-size: var(--tx-sm); font-weight: 700; color: #fff; }
+
+/* ────── LOGIN ────── */
+.login-wrap {
+  display: flex; border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid var(--lt-border); box-shadow: var(--sh-lg);
+  max-width: 780px;
+}
+.login-left {
+  width: 45%; background: linear-gradient(135deg, #0C2518 0%, #0E3020 50%, #145C32 100%);
+  padding: var(--s10) var(--s8); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: var(--s5); text-align: center;
+  position: relative; overflow: hidden;
+}
+.login-left::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(0,193,106,.12) 0%, transparent 65%);
+}
+.ll-icon {
+  width: 60px; height: 60px; background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 800; color: var(--g); letter-spacing: -1px;
+  position: relative;
+}
+.ll-brand { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: .08em; position: relative; }
+.ll-sub { font-size: .72rem; font-weight: 600; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .15em; position: relative; }
+.ll-desc { font-size: var(--tx-sm); color: rgba(255,255,255,.5); max-width: 200px; line-height: 1.5; position: relative; }
+.login-right {
+  flex: 1; background: var(--lt-bg); padding: var(--s10) var(--s8);
+  display: flex; flex-direction: column; justify-content: center; gap: var(--s5);
+}
+.lr-title { font-size: var(--tx-2xl); font-weight: 800; color: var(--lt-text); }
+.lr-sub   { font-size: var(--tx-sm); color: var(--lt-muted); margin-bottom: var(--s2); }
+
+.btn-google {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  background: var(--lt-surface); border: 1.5px solid var(--lt-border2);
+  border-radius: var(--r-sm); padding: 9px 20px; font-family: var(--fp);
+  font-size: var(--tx-sm); font-weight: 600; cursor: pointer;
+  color: var(--lt-text); transition: all var(--tf); box-shadow: var(--sh-xs);
+}
+.btn-google:hover { box-shadow: var(--sh-sm); border-color: var(--lt-border2); }
+.g-icon { font-size: 16px; }
+
+.divider-or {
+  display: flex; align-items: center; gap: var(--s3);
+  font-size: var(--tx-xs); color: var(--lt-muted); font-weight: 500;
+}
+.divider-or::before, .divider-or::after {
+  content: ''; flex: 1; height: 1px; background: var(--lt-border);
+}
+
+/* ────── CHAT WIDGET ────── */
+.chat-wrap {
+  background: var(--lt-surface); border: 1px solid var(--lt-border);
+  border-radius: var(--r-lg); box-shadow: var(--sh-lg);
+  width: 300px; overflow: hidden;
+}
+.chat-header {
+  background: var(--lt-surface); border-bottom: 1px solid var(--lt-border);
+  padding: var(--s4) var(--s5);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.chat-avatar {
+  width: 36px; height: 36px; background: var(--g);
+  border-radius: var(--r-sm); display: flex; align-items: center;
+  justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.chat-name  { font-size: var(--tx-sm); font-weight: 700; color: var(--lt-text); }
+.chat-online { display: flex; align-items: center; gap: 5px; font-size: var(--tx-xs); color: var(--lt-muted); }
+.chat-dot { width: 7px; height: 7px; background: var(--g); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.chat-body { padding: var(--s4) var(--s5); background: var(--lt-bg); min-height: 120px; }
+.chat-bubble {
+  background: var(--lt-surface); border: 1px solid var(--lt-border);
+  border-radius: 0 var(--r-md) var(--r-md) var(--r-md);
+  padding: var(--s3) var(--s4); font-size: var(--tx-sm);
+  color: var(--lt-text); line-height: 1.5; max-width: 90%;
+  box-shadow: var(--sh-xs); margin-bottom: var(--s4);
+}
+.chat-suggestions { display: flex; flex-direction: column; gap: 6px; }
+.chat-sug {
+  background: var(--lt-surface); border: 1px solid var(--lt-border);
+  border-radius: var(--r-sm); padding: 6px 12px;
+  font-size: .72rem; color: var(--lt-muted); cursor: pointer;
+  transition: all var(--tf);
+}
+.chat-sug:hover { border-color: var(--g); color: var(--g-dark); }
+.chat-input-row {
+  display: flex; gap: 8px; align-items: center;
+  padding: var(--s3) var(--s5); border-top: 1px solid var(--lt-border);
+  background: var(--lt-surface);
+}
+.chat-input {
+  flex: 1; border: none; background: var(--lt-bg); border-radius: var(--r-sm);
+  padding: 8px 12px; font-size: var(--tx-sm); color: var(--lt-text);
+  font-family: var(--fp); outline: none; resize: none;
+}
+.chat-send {
+  width: 34px; height: 34px; background: var(--g); border: none;
+  border-radius: var(--r-sm); display: flex; align-items: center;
+  justify-content: center; cursor: pointer; flex-shrink: 0;
+  font-size: 14px; transition: all var(--tf); color: #000;
+}
+.chat-send:hover { background: var(--g-dark); }
+
+/* ────── PROFILE FORM ────── */
+.profile-wrap {
+  background: var(--lt-bg); border-radius: var(--r-lg);
+  padding: var(--s6); max-width: 380px;
+}
+.profile-header {
+  display: flex; align-items: center; gap: var(--s3);
+  margin-bottom: var(--s6);
+}
+.profile-avatar {
+  width: 44px; height: 44px; background: var(--g-light);
+  border: 2px solid var(--lt-border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.profile-name  { font-weight: 700; color: var(--lt-text); }
+.profile-email { font-size: var(--tx-sm); color: var(--lt-muted); }
+.profile-form-inner {
+  background: var(--lt-surface); border-radius: var(--r-md);
+  padding: var(--s5); display: flex; flex-direction: column;
+  gap: var(--s4); box-shadow: var(--sh-xs);
+}
+.btn-save {
+  background: var(--g); color: #000; width: 100%; border: none;
+  border-radius: var(--r-sm); padding: 10px; font-family: var(--fp);
+  font-weight: 700; font-size: var(--tx-sm); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: all var(--tf); margin-top: var(--s2);
+}
+.btn-save:hover { background: var(--g-dark); box-shadow: var(--sh-glow-btn); }
+
+/* ────── NAV ITEMS ────── */
+.nid-wrap { background: var(--dk-base); border-radius: var(--r-md); padding: var(--s3); display: flex; flex-direction: column; gap: 2px; max-width: 200px; }
+.nid { display: flex; align-items: center; justify-content: space-between; padding: 7px var(--s3); border-radius: var(--r-xs); font-size: .82rem; font-weight: 500; }
+.nid.na { background: var(--g); color: #000; }
+.nid.ni-i { color: var(--dk-muted); }
+.nid-l { display: flex; align-items: center; gap: 7px; }
+.badge-t { display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; width: 18px; height: 18px; border-radius: var(--r-full); }
+.bt-g { background: rgba(0,193,106,.2); color: var(--g); }
+.bt-a { background: rgba(0,0,0,.2); color: rgba(0,0,0,.7); }
+
+/* ────── PROGRESS ────── */
+.prog-wrap { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.prog-meta { display: flex; justify-content: space-between; font-size: var(--tx-xs); color: var(--lt-muted); }
+.prog-bar { height: 5px; background: var(--lt-border); border-radius: var(--r-full); overflow: hidden; }
+.prog-fill { height: 100%; background: var(--g); border-radius: var(--r-full); }
+
+/* ────── STATUS CHIPS ────── */
+.status-chip { display: inline-flex; align-items: center; gap: 7px; border-radius: var(--r-sm); padding: 5px 12px; font-size: var(--tx-xs); font-weight: 600; }
+.sc-done    { background: var(--g-pale); color: var(--g-dark); }
+.sc-active  { background: #FFF7ED; color: #B45309; }
+.sc-pending { background: var(--lt-subtle); color: var(--lt-muted); }
+.sc-dot     { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+/* ────── LOGO ICON ────── */
+.logo-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #00A359, #00E07A);
+  border-radius: 11px; display: flex; align-items: center;
+  justify-content: center; font-size: 20px; font-weight: 800;
+  color: #000; letter-spacing: -1px; box-shadow: 0 2px 8px rgba(0,193,106,.35);
+}
+
+/* ────── PRINCIPLES ────── */
+.pg { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin: var(--s5) 0; }
+.pc { border-radius: var(--r-lg); padding: var(--s5); border: 1px solid; }
+.doc { background: #F0FBF5; border-color: rgba(0,193,106,.2); }
+.dnt { background: #FFF1F1; border-color: rgba(220,38,38,.15); }
+.ph { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+.doc .ph { color: var(--g-dark); } .dnt .ph { color: #DC2626; }
+.pl2 { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.pl2 li { font-size: .8rem; color: var(--lt-muted); padding-left: 16px; position: relative; }
+.pl2 li::before { position: absolute; left: 0; }
+.doc li::before { content: '✓'; color: var(--g); }
+.dnt li::before { content: '✗'; color: #DC2626; }
+
+/* ────── CODE ────── */
+.cb {
+  background: var(--dk-base); border: 1px solid var(--dk-border);
+  border-radius: var(--r-md); padding: var(--s5);
+  font-family: var(--fm); font-size: .78rem; color: #9DE8BC;
+  overflow-x: auto; line-height: 1.75; margin: var(--s3) 0; cursor: pointer;
+}
+.cb:hover { border-color: rgba(0,193,106,.3); }
+.cm { color: #486B54; } .ck { color: #7FD1AE; }
+.cv { color: #C3E88D; } .cvar { color: #6DE8A0; }
+
+/* ────── THEME LABEL ────── */
+.theme-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--tx-xs); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  padding: 4px 10px; border-radius: var(--r-full); margin-bottom: var(--s3);
+}
+.theme-dk { background: var(--dk-card); color: var(--dk-muted); border: 1px solid var(--dk-border); }
+.theme-lt { background: var(--lt-subtle); color: var(--lt-muted); border: 1px solid var(--lt-border); }
+
+/* ────── TOAST ────── */
+.toast {
+  position: fixed; bottom: 22px; right: 22px;
+  background: var(--lt-text); color: var(--lt-surface);
+  font-weight: 700; font-size: var(--tx-sm);
+  padding: 9px 18px; border-radius: var(--r-md);
+  opacity: 0; transform: translateY(6px);
+  transition: all var(--tn); pointer-events: none; z-index: 1000;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--lt-border2); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<nav class="sb">
+  <div class="sb-logo">
+    <div class="sb-icon">G</div>
+    <div>
+      <div class="sb-brand">GRAMA</div>
+      <div class="sb-sub">Design System</div>
+    </div>
+  </div>
+  <div class="nl">
+    <div class="nl-h">Fundamentos</div>
+    <button class="ni on"  onclick="show('brand',this)"><span class="ndot"></span>Marca & Identidad</button>
+    <button class="ni"     onclick="show('colors',this)"><span class="ndot"></span>Colores & Temas</button>
+    <button class="ni"     onclick="show('typo',this)"><span class="ndot"></span>Tipografía</button>
+    <button class="ni"     onclick="show('space',this)"><span class="ndot"></span>Espaciado & Radios</button>
+  </div>
+  <div class="nl">
+    <div class="nl-h">Componentes</div>
+    <button class="ni"     onclick="show('btns',this)"><span class="ndot"></span>Botones</button>
+    <button class="ni"     onclick="show('inputs',this)"><span class="ndot"></span>Inputs & Formularios</button>
+    <button class="ni"     onclick="show('cards',this)"><span class="ndot"></span>Cards & Materiales</button>
+    <button class="ni"     onclick="show('nav',this)"><span class="ndot"></span>Navegación</button>
+    <button class="ni"     onclick="show('chat',this)"><span class="ndot"></span>Chatbot IA</button>
+    <button class="ni"     onclick="show('login',this)"><span class="ndot"></span>Login</button>
+    <button class="ni"     onclick="show('profile',this)"><span class="ndot"></span>Perfil</button>
+    <button class="ni"     onclick="show('status',this)"><span class="ndot"></span>Estados & Badges</button>
+  </div>
+  <div class="nl">
+    <div class="nl-h">Guías</div>
+    <button class="ni"     onclick="show('rules',this)"><span class="ndot"></span>Principios UI</button>
+    <button class="ni"     onclick="show('tokens',this)"><span class="ndot"></span>Tokens CSS</button>
+  </div>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<main class="mn">
+
+<!-- ── BRAND ── -->
+<section class="sec on" id="brand">
+  <div class="hero">
+    <div class="hero-badge">✦ GRAMA — Design System v2.0</div>
+    <h1>Manual de<br><em>Marca & UI</em></h1>
+    <p>Sistema de diseño oficial actualizado con todas las vistas de la plataforma: dashboard, talleres, chat IA, login y perfil.</p>
+  </div>
+
+  <h2 class="st">Marca & Identidad</h2>
+  <p class="ss">Los elementos que definen la identidad visual de GRAMA.</p>
+
+  <div class="sub">Logo — variantes</div>
+  <div class="g2">
+    <div>
+      <div class="theme-label theme-dk">▪ Sobre oscuro</div>
+      <div style="background:var(--dk-base);padding:28px;border-radius:var(--r-md);display:flex;align-items:center;gap:12px;">
+        <div class="logo-icon">G</div>
+        <div>
+          <div style="font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:.06em;">GRAMA</div>
+          <div style="font-size:.65rem;color:var(--dk-muted);text-transform:uppercase;letter-spacing:.15em;">Proyectos Educativos</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="theme-label theme-lt">▪ Sobre claro</div>
+      <div style="background:var(--lt-bg);padding:28px;border-radius:var(--r-md);display:flex;align-items:center;gap:12px;border:1px solid var(--lt-border);">
+        <div class="logo-icon">G</div>
+        <div>
+          <div style="font-size:1.3rem;font-weight:800;color:var(--lt-text);letter-spacing:.06em;">GRAMA</div>
+          <div style="font-size:.65rem;color:var(--lt-muted);text-transform:uppercase;letter-spacing:.15em;">Proyectos Educativos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">Personalidad</div>
+  <div class="g3">
+    <div class="card"><div style="font-size:22px;margin-bottom:8px;">🌱</div><div style="font-weight:700;margin-bottom:3px;">Empoderador</div><div style="font-size:.8rem;color:var(--lt-muted);">Habilitamos el aprendizaje técnico con confianza.</div></div>
+    <div class="card"><div style="font-size:22px;margin-bottom:8px;">⚙️</div><div style="font-weight:700;margin-bottom:3px;">Técnico</div><div style="font-size:.8rem;color:var(--lt-muted);">Precisión y claridad en cada interacción.</div></div>
+    <div class="card"><div style="font-size:22px;margin-bottom:8px;">🤝</div><div style="font-weight:700;margin-bottom:3px;">Cercano</div><div style="font-size:.8rem;color:var(--lt-muted);">Tono humano y accesible, nunca frío.</div></div>
+  </div>
+</section>
+
+<!-- ── COLORS ── -->
+<section class="sec" id="colors">
+  <h2 class="st">Colores & Temas</h2>
+  <p class="ss">GRAMA usa un sistema <strong>dual</strong>: sidebar/heroes en oscuro, contenido/formularios en claro. Clic en un swatch para copiar el hex.</p>
+
+  <div class="sub">🟢 Brand — verde primario</div>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-c" style="background:#00C16A" onclick="cpx('#00C16A')"></div><div class="sw-n">Green 500</div><div class="sw-h">#00C16A</div></div>
+    <div class="sw"><div class="sw-c" style="background:#00A359" onclick="cpx('#00A359')"></div><div class="sw-n">Green 600</div><div class="sw-h">#00A359</div></div>
+    <div class="sw"><div class="sw-c" style="background:#007A42" onclick="cpx('#007A42')"></div><div class="sw-n">Green 700</div><div class="sw-h">#007A42</div></div>
+    <div class="sw"><div class="sw-c" style="background:#E8F7F0;border:1px solid #c8e8d8" onclick="cpx('#E8F7F0')"></div><div class="sw-n">Green 50</div><div class="sw-h">#E8F7F0</div></div>
+    <div class="sw"><div class="sw-c" style="background:#F0FBF5;border:1px solid #c8e8d8" onclick="cpx('#F0FBF5')"></div><div class="sw-n">Green 25</div><div class="sw-h">#F0FBF5</div></div>
+  </div>
+
+  <div class="sub">🌑 Tema oscuro (sidebar / hero banners)</div>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-c" style="background:#0C1D15;border:1px solid #1F3828" onclick="cpx('#0C1D15')"></div><div class="sw-n">DK Base</div><div class="sw-h">#0C1D15</div></div>
+    <div class="sw"><div class="sw-c" style="background:#112219;border:1px solid #1F3828" onclick="cpx('#112219')"></div><div class="sw-n">DK Surface</div><div class="sw-h">#112219</div></div>
+    <div class="sw"><div class="sw-c" style="background:#162D1E;border:1px solid #1F3828" onclick="cpx('#162D1E')"></div><div class="sw-n">DK Card</div><div class="sw-h">#162D1E</div></div>
+    <div class="sw"><div class="sw-c" style="background:#1F3828;border:1px solid #2a4535" onclick="cpx('#1F3828')"></div><div class="sw-n">DK Border</div><div class="sw-h">#1F3828</div></div>
+    <div class="sw"><div class="sw-c" style="background:#D8EFE2;border:1px solid #c8e8d8" onclick="cpx('#D8EFE2')"></div><div class="sw-n">DK Text</div><div class="sw-h">#D8EFE2</div></div>
+    <div class="sw"><div class="sw-c" style="background:#6B9A7A;border:1px solid #c8e8d8" onclick="cpx('#6B9A7A')"></div><div class="sw-n">DK Muted</div><div class="sw-h">#6B9A7A</div></div>
+  </div>
+
+  <div class="sub">☀️ Tema claro (contenido / formularios / cards)</div>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-c" style="background:#F5F5F0;border:1px solid #E4E8E3" onclick="cpx('#F5F5F0')"></div><div class="sw-n">LT Bg</div><div class="sw-h">#F5F5F0</div></div>
+    <div class="sw"><div class="sw-c" style="background:#FFFFFF;border:1px solid #E4E8E3" onclick="cpx('#FFFFFF')"></div><div class="sw-n">LT Surface</div><div class="sw-h">#FFFFFF</div></div>
+    <div class="sw"><div class="sw-c" style="background:#E4E8E3;border:1px solid #ccc" onclick="cpx('#E4E8E3')"></div><div class="sw-n">LT Border</div><div class="sw-h">#E4E8E3</div></div>
+    <div class="sw"><div class="sw-c" style="background:#D0D8CC;border:1px solid #ccc" onclick="cpx('#D0D8CC')"></div><div class="sw-n">LT Border 2</div><div class="sw-h">#D0D8CC</div></div>
+    <div class="sw"><div class="sw-c" style="background:#1A2B20;border:1px solid #ccc" onclick="cpx('#1A2B20')"></div><div class="sw-n">LT Text</div><div class="sw-h">#1A2B20</div></div>
+    <div class="sw"><div class="sw-c" style="background:#6B7E6F;border:1px solid #ccc" onclick="cpx('#6B7E6F')"></div><div class="sw-n">LT Muted</div><div class="sw-h">#6B7E6F</div></div>
+    <div class="sw"><div class="sw-c" style="background:#F0F4F1;border:1px solid #E4E8E3" onclick="cpx('#F0F4F1')"></div><div class="sw-n">LT Subtle</div><div class="sw-h">#F0F4F1</div></div>
+  </div>
+
+  <div class="sub">🏷 Tags de tipo de contenido</div>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-c" style="background:#FEF3F2;border:1px solid #fcc" onclick="cpx('#FEF3F2')"></div><div class="sw-n">PDF bg</div><div class="sw-h">#FEF3F2</div></div>
+    <div class="sw"><div class="sw-c" style="background:#DC2626" onclick="cpx('#DC2626')"></div><div class="sw-n">PDF text</div><div class="sw-h">#DC2626</div></div>
+    <div class="sw"><div class="sw-c" style="background:#FFF7ED;border:1px solid #fde8c0" onclick="cpx('#FFF7ED')"></div><div class="sw-n">Video bg</div><div class="sw-h">#FFF7ED</div></div>
+    <div class="sw"><div class="sw-c" style="background:#D97706" onclick="cpx('#D97706')"></div><div class="sw-n">Video text</div><div class="sw-h">#D97706</div></div>
+    <div class="sw"><div class="sw-c" style="background:#F5F3FF;border:1px solid #ddd4fe" onclick="cpx('#F5F3FF')"></div><div class="sw-n">3D bg</div><div class="sw-h">#F5F3FF</div></div>
+    <div class="sw"><div class="sw-c" style="background:#7C3AED" onclick="cpx('#7C3AED')"></div><div class="sw-n">3D text</div><div class="sw-h">#7C3AED</div></div>
+  </div>
+</section>
+
+<!-- ── TYPO ── -->
+<section class="sec" id="typo">
+  <h2 class="st">Tipografía</h2>
+  <p class="ss"><strong>Plus Jakarta Sans</strong> como fuente principal (reemplaza Space Grotesk). DM Mono exclusivamente para código y tokens.</p>
+  <div class="card">
+    <div class="tr"><div class="tm"><div class="tl">hero</div><div class="ts">3.8rem · 800 · −0.025em</div></div><div class="tsamp" style="font-size:2.6rem;font-weight:800;letter-spacing:-.025em;line-height:1.02;">Bienvenido</div></div>
+    <div class="tr"><div class="tm"><div class="tl">h1 · display</div><div class="ts">2.8rem · 800 · −0.02em</div></div><div class="tsamp" style="font-size:2rem;font-weight:800;letter-spacing:-.02em;">Talleres de Formación</div></div>
+    <div class="tr"><div class="tm"><div class="tl">h2</div><div class="ts">2.1rem · 800 · −0.02em</div></div><div class="tsamp" style="font-size:1.6rem;font-weight:800;letter-spacing:-.02em;">Mecánica Automotriz</div></div>
+    <div class="tr"><div class="tm"><div class="tl">h3</div><div class="ts">1.6rem · 700</div></div><div class="tsamp" style="font-size:1.3rem;font-weight:700;">Módulo 1: Fundamentos</div></div>
+    <div class="tr"><div class="tm"><div class="tl">body-lg</div><div class="ts">1.125rem · 400 · 1.6</div></div><div class="tsamp" style="font-size:1.1rem;color:var(--lt-muted);">Aprende diagnóstico y mantenimiento de vehículos.</div></div>
+    <div class="tr"><div class="tm"><div class="tl">body</div><div class="ts">1rem · 400 · 1.6</div></div><div class="tsamp" style="color:var(--lt-muted);">Texto de descripción y contenido general de la plataforma.</div></div>
+    <div class="tr"><div class="tm"><div class="tl">small · label</div><div class="ts">0.85rem · 600</div></div><div class="tsamp" style="font-size:.85rem;font-weight:600;color:var(--lt-muted);">2 videos · 2 PDFs · 1 archivo 3D</div></div>
+    <div class="tr"><div class="tm"><div class="tl">caption · xs</div><div class="ts">0.72rem · 500</div></div><div class="tsamp" style="font-size:.72rem;font-weight:500;color:var(--lt-muted);text-transform:uppercase;letter-spacing:.08em;">TALLER 2 DE 9</div></div>
+    <div class="tr"><div class="tm"><div class="tl">mono</div><div class="ts">0.78rem · DM Mono</div></div><div class="tsamp" style="font-size:.78rem;font-family:var(--fm);color:var(--lt-muted);">--g-green: #00C16A;</div></div>
+  </div>
+</section>
+
+<!-- ── SPACING ── -->
+<section class="sec" id="space">
+  <h2 class="st">Espaciado & Radios</h2>
+  <p class="ss">Escala base de 4px. Radios actualizados a partir de las capturas reales.</p>
+  <div class="card">
+    <div class="spr"><div class="spb" style="width:4px"></div><div class="spi"><span class="spk">--s1</span><span class="spv">4px</span><span class="spdesc">Detalles mínimos</span></div></div>
+    <div class="spr"><div class="spb" style="width:8px"></div><div class="spi"><span class="spk">--s2</span><span class="spv">8px</span><span class="spdesc">Gap íconos–texto, gaps pequeños</span></div></div>
+    <div class="spr"><div class="spb" style="width:12px"></div><div class="spi"><span class="spk">--s3</span><span class="spv">12px</span><span class="spdesc">Padding nav items, chat bubbles</span></div></div>
+    <div class="spr"><div class="spb" style="width:16px"></div><div class="spi"><span class="spk">--s4</span><span class="spv">16px</span><span class="spdesc">Padding botones, chat header</span></div></div>
+    <div class="spr"><div class="spb" style="width:20px"></div><div class="spi"><span class="spk">--s5</span><span class="spv">20px</span><span class="spdesc">Padding material cards, perfil</span></div></div>
+    <div class="spr"><div class="spb" style="width:24px"></div><div class="spi"><span class="spk">--s6</span><span class="spv">24px</span><span class="spdesc">Padding interno de cards</span></div></div>
+    <div class="spr"><div class="spb" style="width:32px"></div><div class="spi"><span class="spk">--s8</span><span class="spv">32px</span><span class="spdesc">Padding sidebar, hero stats</span></div></div>
+    <div class="spr"><div class="spb" style="width:40px"></div><div class="spi"><span class="spk">--s10</span><span class="spv">40px</span><span class="spdesc">Padding hero / login panels</span></div></div>
+    <div class="spr"><div class="spb" style="width:48px"></div><div class="spi"><span class="spk">--s12</span><span class="spv">48px</span><span class="spdesc">Padding principal del contenido</span></div></div>
+  </div>
+  <div class="sub">Radios — referencia visual</div>
+  <div class="card">
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+      <div style="text-align:center;"><div style="width:52px;height:52px;background:var(--g);border-radius:4px;opacity:.85;"></div><div style="font-size:9px;color:var(--lt-muted);margin-top:5px;font-family:var(--fm);">xs·4px<br>badges</div></div>
+      <div style="text-align:center;"><div style="width:52px;height:52px;background:var(--g);border-radius:8px;opacity:.85;"></div><div style="font-size:9px;color:var(--lt-muted);margin-top:5px;font-family:var(--fm);">sm·8px<br>inputs/nav</div></div>
+      <div style="text-align:center;"><div style="width:52px;height:52px;background:var(--g);border-radius:12px;opacity:.85;"></div><div style="font-size:9px;color:var(--lt-muted);margin-top:5px;font-family:var(--fm);">md·12px<br>buttons</div></div>
+      <div style="text-align:center;"><div style="width:52px;height:52px;background:var(--g);border-radius:16px;opacity:.85;"></div><div style="font-size:9px;color:var(--lt-muted);margin-top:5px;font-family:var(--fm);">lg·16px<br>cards</div></div>
+      <div style="text-align:center;"><div style="width:52px;height:52px;background:var(--g);border-radius:24px;opacity:.85;"></div><div style="font-size:9px;color:var(--lt-muted);margin-top:5px;font-family:var(--fm);">xl·24px<br>modals</div></div>
+      <div style="text-align:center;"><div style="width:52px;height:52px;background:var(--g);border-radius:9999px;opacity:.85;"></div><div style="font-size:9px;color:var(--lt-muted);margin-top:5px;font-family:var(--fm);">full<br>pills/dots</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BUTTONS ── -->
+<section class="sec" id="btns">
+  <h2 class="st">Botones</h2>
+  <p class="ss">Dos contextos: claro (contenido) y oscuro (sidebar, heroes).</p>
+  <div class="sub">Contexto claro — variantes</div>
+  <div class="demo">
+    <div><div class="dlbl">Primary</div><button class="btn btn-p">Abrir &rarr;</button></div>
+    <div><div class="dlbl">Secondary</div><button class="btn btn-s">Ver materiales</button></div>
+    <div><div class="dlbl">Ghost</div><button class="btn btn-g">Ver modelo 3D &rarr;</button></div>
+    <div><div class="dlbl">Icon CTA</div><button class="btn-icon">›</button></div>
+  </div>
+  <div class="sub">Contexto oscuro (hero)</div>
+  <div class="demo-dk">
+    <div><div class="dlbl-dk">Primary</div><button class="btn btn-p">Iniciar Taller</button></div>
+    <div><div class="dlbl-dk">Outline dark</div><button class="btn btn-dk-s">Ver programa</button></div>
+  </div>
+  <div class="sub">Tamaños</div>
+  <div class="demo" style="align-items:center;">
+    <div><div class="dlbl">sm</div><button class="btn btn-p btn-sm">Guardar</button></div>
+    <div><div class="dlbl">default</div><button class="btn btn-p">Guardar cambios</button></div>
+    <div><div class="dlbl">lg</div><button class="btn btn-p btn-lg">Iniciar sesión</button></div>
+  </div>
+  <div class="sub">Google OAuth (login)</div>
+  <div class="demo" style="max-width:340px;">
+    <button class="btn-google" style="width:100%;">
+      <span class="g-icon">🔵</span> Continuar con Google
+    </button>
+  </div>
+</section>
+
+<!-- ── INPUTS ── -->
+<section class="sec" id="inputs">
+  <h2 class="st">Inputs & Formularios</h2>
+  <p class="ss">Todos los inputs usan contexto claro. Fondo blanco, bordes sutiles, focus verde.</p>
+  <div class="sub">Búsqueda</div>
+  <div class="card" style="max-width:460px;">
+    <div class="inpw"><span class="inpi">🔍</span><input class="inp inp-ico" placeholder="Buscar talleres, materiales..."></div>
+  </div>
+  <div class="sub">Variantes de input</div>
+  <div class="g2" style="max-width:660px;">
+    <div class="inp-group"><label class="lbl">Nombre</label><input class="inp" placeholder="Tomas Donoso"></div>
+    <div class="inp-group"><label class="lbl">Foco activo</label><input class="inp" placeholder="Email" style="border-color:var(--g);box-shadow:var(--sh-glow);"></div>
+    <div class="inp-group"><label class="lbl">Deshabilitado</label><input class="inp" placeholder="No editable" disabled style="opacity:.45;cursor:not-allowed;"></div>
+    <div class="inp-group"><label class="lbl">Error</label><input class="inp inp-err" value="formato incorrecto"></div>
+  </div>
+  <div class="sub">Select / Dropdown</div>
+  <div class="g2" style="max-width:660px;">
+    <div class="inp-group"><label class="lbl">Colegio</label><select class="sel"><option>Selecciona tu colegio</option><option>Colegio 1</option></select></div>
+    <div class="inp-group"><label class="lbl">Rol</label><select class="sel"><option>Profesor</option><option>Estudiante</option></select></div>
+  </div>
+  <div class="sub">Filtros de contenido</div>
+  <div class="card">
+    <div class="ftabs">
+      <div class="ft ft-a">Todos</div>
+      <div class="ft ft-i">Videos</div>
+      <div class="ft ft-i">PDFs</div>
+      <div class="ft ft-i">Fichas</div>
+      <div class="ft ft-i">3D</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CARDS ── -->
+<section class="sec" id="cards">
+  <h2 class="st">Cards & Materiales</h2>
+  <p class="ss">Dos tipos: <em>Material card</em> (contenido plano, fondo blanco) y <em>Banner hero</em> (taller, fondo oscuro).</p>
+
+  <div class="sub">Hero banner del taller</div>
+  <div class="taller-hero">
+    <div class="th-badge">TALLER 2 DE 9</div>
+    <div class="th-title">Mecánica Automotriz</div>
+    <div class="th-desc">Aprende los fundamentos de la mecánica automotriz, diagnóstico y mantenimiento de vehículos.</div>
+    <div class="th-stats">
+      <div class="th-stat"><span class="th-stat-icon">⏱</span><div><div class="th-stat-label">Duración</div><div class="th-stat-val">16 horas</div></div></div>
+      <div class="th-stat"><span class="th-stat-icon">📦</span><div><div class="th-stat-label">Módulos</div><div class="th-stat-val">6 módulos</div></div></div>
+      <div class="th-stat"><span class="th-stat-icon">📂</span><div><div class="th-stat-label">Materiales</div><div class="th-stat-val">5 archivos</div></div></div>
+    </div>
+  </div>
+
+  <div class="sub">Material cards (claro)</div>
+  <div class="g3">
+    <div class="mcard">
+      <div class="m-type-tag tag-pdf">📄 PDF</div>
+      <div class="m-title">Taller de Mecánica Automotriz</div>
+      <div class="m-desc">Manual del taller de mecánica automotriz</div>
+      <div class="m-footer"><button class="btn btn-p btn-sm">Abrir &rarr;</button><button style="background:none;border:none;cursor:pointer;color:var(--lt-muted);font-size:16px;">⬇</button></div>
+    </div>
+    <div class="mcard">
+      <div class="m-type-tag tag-vid">▶ Video</div>
+      <div class="m-title">Introducción a la Mecánica</div>
+      <div class="m-desc">Video introductorio sobre mecánica automotriz</div>
+      <div class="m-footer"><span style="font-size:.72rem;color:var(--lt-muted);">⏱ 15 min</span></div>
+    </div>
+    <div class="mcard">
+      <div class="m-type-tag tag-3d">🎲 Archivo 3D</div>
+      <div class="m-title">Modelo de pistón</div>
+      <div class="m-desc">Archivo 3D de pistón para análisis. STL</div>
+      <div class="m-footer"><button class="btn btn-g btn-sm">Ver modelo 3D &rarr;</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NAV ── -->
+<section class="sec" id="nav">
+  <h2 class="st">Navegación</h2>
+  <p class="ss">Sidebar oscuro con nav items activos en verde sólido.</p>
+  <div class="sub">Sidebar nav — items</div>
+  <div class="nid-wrap">
+    <div class="nid na"><div class="nid-l">🏠 Inicio</div></div>
+    <div class="nid ni-i"><div class="nid-l">🪵 Ebanistería</div><div class="badge-t bt-g">T1</div></div>
+    <div class="nid ni-i" style="background:rgba(0,193,106,.15);color:var(--g);">
+      <div class="nid-l">🔧 <strong>Mecánica Automotriz</strong></div>
+      <div class="badge-t" style="background:var(--g);color:#000;">T2</div>
+    </div>
+    <div class="nid ni-i"><div class="nid-l">💻 Computación</div><div class="badge-t bt-g">T3</div></div>
+    <div class="nid ni-i"><div class="nid-l">⚡ Electrónica</div><div class="badge-t bt-g">T4</div></div>
+  </div>
+  <div class="sub">Encabezado de bienvenida</div>
+  <div class="card">
+    <div style="font-size:1.6rem;font-weight:800;color:var(--lt-text);">Bienvenido, Tomas 👋</div>
+    <div style="color:var(--lt-muted);margin-top:3px;font-size:var(--tx-sm);">Explora los 9 talleres de capacitación · 150 horas de formación</div>
+  </div>
+  <div class="sub">Breadcrumb / volver</div>
+  <div class="card">
+    <div style="font-size:var(--tx-sm);color:var(--lt-muted);display:flex;align-items:center;gap:5px;cursor:pointer;">‹ <span style="color:var(--g);font-weight:600;">Volver a todos los talleres</span></div>
+  </div>
+</section>
+
+<!-- ── CHAT ── -->
+<section class="sec" id="chat">
+  <h2 class="st">Chatbot IA</h2>
+  <p class="ss">Widget flotante con fondo claro. Se abre desde el chip de Asistente IA en el sidebar.</p>
+  <div class="sub">Widget completo</div>
+  <div class="chat-wrap">
+    <div class="chat-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <div class="chat-name">Asistente Grama</div>
+          <div class="chat-online"><div class="chat-dot"></div>En línea</div>
+        </div>
+      </div>
+      <button style="background:none;border:none;cursor:pointer;color:var(--lt-muted);font-size:18px;">✕</button>
+    </div>
+    <div class="chat-body">
+      <div class="chat-bubble">¡Hola! Soy el Asistente Grama. Tengo conocimiento sobre el equipamiento del taller de Ebanistería y su programa formativo. ¿En qué te puedo ayudar?</div>
+      <div class="chat-suggestions">
+        <div class="chat-sug">¿Qué equipos tiene la zona de maquinado?</div>
+        <div class="chat-sug">¿Cuántas sierras circulares hay?</div>
+        <div class="chat-sug">¿Qué módulos tiene el programa de 1° grado?</div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <textarea class="chat-input" placeholder="Pregunta sobre equipamiento o el programa" rows="2"></textarea>
+      <button class="chat-send">➤</button>
+    </div>
+  </div>
+  <div class="sub">Chip de activación (sidebar)</div>
+  <div style="background:var(--dk-base);padding:12px;border-radius:var(--r-md);display:inline-flex;align-items:center;gap:10px;cursor:pointer;">
+    <div style="width:32px;height:32px;background:rgba(0,193,106,.15);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:14px;">✨</div>
+    <div><div style="font-size:var(--tx-sm);font-weight:700;color:var(--dk-text);">Asistente IA</div><div style="font-size:var(--tx-xs);color:var(--dk-muted);">Pregúntame lo que quieras</div></div>
+  </div>
+</section>
+
+<!-- ── LOGIN ── -->
+<section class="sec" id="login">
+  <h2 class="st">Pantalla de Login</h2>
+  <p class="ss">Layout split: izquierda oscura con gradiente verde, derecha clara con formulario.</p>
+  <div class="sub">Login completo</div>
+  <div class="login-wrap">
+    <div class="login-left">
+      <div class="ll-icon">G</div>
+      <div class="ll-brand">GRAMA</div>
+      <div class="ll-sub">Proyectos Educativos</div>
+      <div class="ll-desc">Plataforma de capacitación en fabricación digital. Accede a talleres, videos, manuales y más.</div>
+    </div>
+    <div class="login-right">
+      <div>
+        <div class="lr-title">Iniciar sesión</div>
+        <div class="lr-sub">Ingresa tus credenciales para acceder</div>
+      </div>
+      <button class="btn-google"><span class="g-icon">🔵</span> Continuar con Google</button>
+      <div class="divider-or">o</div>
+      <div class="inp-group">
+        <label class="lbl">Correo electrónico</label>
+        <input class="inp" type="email" placeholder="tu@correo.com">
+      </div>
+      <div class="inp-group">
+        <label class="lbl">Contraseña</label>
+        <div style="position:relative;">
+          <input class="inp" type="password" placeholder="••••••••" style="padding-right:40px;">
+          <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--lt-muted);cursor:pointer;">👁</span>
+        </div>
+      </div>
+      <a href="#" style="font-size:var(--tx-sm);color:var(--g);font-weight:600;text-decoration:none;">¿Olvidaste tu contraseña?</a>
+      <button class="btn btn-p btn-lg" style="width:100%;justify-content:center;">→ Iniciar sesión</button>
+      <div style="text-align:center;font-size:var(--tx-sm);color:var(--lt-muted);">¿No tienes cuenta? <a href="#" style="color:var(--g);font-weight:700;text-decoration:none;">Regístrate</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROFILE ── -->
+<section class="sec" id="profile">
+  <h2 class="st">Perfil de Usuario</h2>
+  <p class="ss">Formulario en contexto claro. Fondo base gris suave, tarjeta blanca interna.</p>
+  <div class="sub">Formulario Mi Perfil</div>
+  <div class="profile-wrap">
+    <div class="profile-header">
+      <div class="profile-avatar">👤</div>
+      <div>
+        <div class="profile-name">Mi perfil</div>
+        <div class="profile-email">t.donoso@inroprin.com</div>
+      </div>
+    </div>
+    <div class="profile-form-inner">
+      <div class="inp-group"><label class="lbl">Nombre</label><input class="inp" value="Tomas Donoso"></div>
+      <div class="inp-group"><label class="lbl">Apellido</label><input class="inp" placeholder="Pérez"></div>
+      <div class="inp-group"><label class="lbl">Colegio</label><select class="sel"><option>Selecciona tu colegio</option></select></div>
+      <div class="inp-group"><label class="lbl">Rol</label><select class="sel"><option>Profesor</option><option>Estudiante</option></select></div>
+      <button class="btn-save">💾 Guardar cambios</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATUS ── -->
+<section class="sec" id="status">
+  <h2 class="st">Estados & Badges</h2>
+  <p class="ss">Chips de estado, tags de tipo de contenido y badges de taller.</p>
+  <div class="sub">Estados de progreso</div>
+  <div class="demo">
+    <div class="status-chip sc-done"><span class="sc-dot"></span>Completado</div>
+    <div class="status-chip sc-active"><span class="sc-dot"></span>En progreso</div>
+    <div class="status-chip sc-pending"><span class="sc-dot"></span>No iniciado</div>
+  </div>
+  <div class="sub">Tags de tipo de material</div>
+  <div class="demo">
+    <span class="m-type-tag tag-pdf">📄 PDF</span>
+    <span class="m-type-tag tag-vid">▶ Video</span>
+    <span class="m-type-tag tag-3d">🎲 Archivo 3D</span>
+  </div>
+  <div class="sub">Badges de taller (T1–T9)</div>
+  <div class="demo-dk">
+    <span class="badge-t" style="background:var(--g);color:#000;width:22px;height:22px;font-size:10px;">T1</span>
+    <span class="badge-t" style="background:var(--g);color:#000;width:22px;height:22px;font-size:10px;">T2</span>
+    <span class="badge-t" style="background:rgba(0,193,106,.2);color:var(--g);width:22px;height:22px;font-size:10px;">T5</span>
+    <span class="badge-t" style="background:var(--dk-border);color:var(--dk-muted);width:22px;height:22px;font-size:10px;">T9</span>
+  </div>
+  <div class="sub">Barra de progreso</div>
+  <div class="card" style="max-width:360px;">
+    <div class="prog-wrap">
+      <div class="prog-meta"><span>En progreso</span><span style="color:var(--g);font-weight:700;">65%</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:65%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RULES ── -->
+<section class="sec" id="rules">
+  <h2 class="st">Principios UI</h2>
+  <p class="ss">Reglas de diseño extraídas de la plataforma real.</p>
+  <div class="pg">
+    <div class="pc doc"><div class="ph">✓ Hacer</div><ul class="pl2">
+      <li>Sidebar y heroes en oscuro, contenido en claro</li>
+      <li>Verde para CTA primario, ítem activo y progreso</li>
+      <li>Inputs siempre en fondo blanco con sombra sutil</li>
+      <li>Material cards planas (no elevación excesiva)</li>
+      <li>Tags coloreados por tipo: PDF rojo, Video amber, 3D violeta</li>
+      <li>Login con split layout 45/55</li>
+      <li>Formularios agrupados en tarjeta blanca sobre fondo gris</li>
+    </ul></div>
+    <div class="pc dnt"><div class="ph">✗ Evitar</div><ul class="pl2">
+      <li>Fondo oscuro en formularios o perfil</li>
+      <li>Verde en texto corrido o etiquetas decorativas</li>
+      <li>Inputs sin label visible</li>
+      <li>Borders gruesos o muy oscuros en contexto claro</li>
+      <li>Cards con sombra pesada en la lista de materiales</li>
+      <li>Modal de chat con fondo oscuro</li>
+      <li>Botón de guardado en color gris/neutro</li>
+    </ul></div>
+  </div>
+  <div class="sub">Accesibilidad</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:9px;">
+      <div style="font-size:var(--tx-sm);color:var(--lt-muted);">🔆 Contraste AA: 4.5:1 mínimo para texto sobre fondos claros y oscuros</div>
+      <div style="font-size:var(--tx-sm);color:var(--lt-muted);">⌨️ Focus visible en todos los interactivos (no quitar outline, sobreescribir con estilo verde)</div>
+      <div style="font-size:var(--tx-sm);color:var(--lt-muted);">🎯 Área de toque mínima: 44×44px (botones icon, badges)</div>
+      <div style="font-size:var(--tx-sm);color:var(--lt-muted);">🏷 Labels visibles en todos los campos del formulario</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOKENS ── -->
+<section class="sec" id="tokens">
+  <h2 class="st">Tokens CSS</h2>
+  <p class="ss">Variables completas del sistema dual. Clic en el bloque para copiar.</p>
+  <div class="cb" onclick="cpTokens()">
+<span class="cm">/* ── GRAMA DESIGN SYSTEM v2 — CSS VARIABLES ── */</span>
+<span class="ck">:root</span> {
+  <span class="cm">/* BRAND */</span>
+  <span class="cvar">--g</span>:         <span class="cv">#00C16A</span>;
+  <span class="cvar">--g-dark</span>:    <span class="cv">#00A359</span>;
+  <span class="cvar">--g-deep</span>:    <span class="cv">#007A42</span>;
+  <span class="cvar">--g-light</span>:   <span class="cv">#E8F7F0</span>;
+  <span class="cvar">--g-pale</span>:    <span class="cv">#F0FBF5</span>;
+
+  <span class="cm">/* DARK (sidebar / heroes) */</span>
+  <span class="cvar">--dk-base</span>:    <span class="cv">#0C1D15</span>;
+  <span class="cvar">--dk-surface</span>: <span class="cv">#112219</span>;
+  <span class="cvar">--dk-card</span>:    <span class="cv">#162D1E</span>;
+  <span class="cvar">--dk-border</span>:  <span class="cv">#1F3828</span>;
+  <span class="cvar">--dk-text</span>:    <span class="cv">#D8EFE2</span>;
+  <span class="cvar">--dk-muted</span>:   <span class="cv">#6B9A7A</span>;
+
+  <span class="cm">/* LIGHT (content / forms / cards) */</span>
+  <span class="cvar">--lt-bg</span>:      <span class="cv">#F5F5F0</span>;
+  <span class="cvar">--lt-surface</span>: <span class="cv">#FFFFFF</span>;
+  <span class="cvar">--lt-border</span>:  <span class="cv">#E4E8E3</span>;
+  <span class="cvar">--lt-border2</span>: <span class="cv">#D0D8CC</span>;
+  <span class="cvar">--lt-text</span>:    <span class="cv">#1A2B20</span>;
+  <span class="cvar">--lt-muted</span>:   <span class="cv">#6B7E6F</span>;
+  <span class="cvar">--lt-subtle</span>:  <span class="cv">#F0F4F1</span>;
+
+  <span class="cm">/* CONTENT TYPE TAGS */</span>
+  <span class="cvar">--tag-pdf-bg</span>:  <span class="cv">#FEF3F2</span>;  <span class="cvar">--tag-pdf-txt</span>:  <span class="cv">#DC2626</span>;
+  <span class="cvar">--tag-vid-bg</span>:  <span class="cv">#FFF7ED</span>;  <span class="cvar">--tag-vid-txt</span>:  <span class="cv">#D97706</span>;
+  <span class="cvar">--tag-3d-bg</span>:   <span class="cv">#F5F3FF</span>;  <span class="cvar">--tag-3d-txt</span>:   <span class="cv">#7C3AED</span>;
+
+  <span class="cm">/* TYPOGRAPHY */</span>
+  <span class="cvar">--fp</span>: <span class="cv">'Plus Jakarta Sans', sans-serif</span>;
+  <span class="cvar">--fm</span>: <span class="cv">'DM Mono', monospace</span>;
+
+  <span class="cm">/* TYPE SCALE */</span>
+  <span class="cvar">--tx-xs</span>: <span class="cv">0.72rem</span>;  <span class="cvar">--tx-sm</span>: <span class="cv">0.85rem</span>;  <span class="cvar">--tx-base</span>: <span class="cv">1rem</span>;
+  <span class="cvar">--tx-lg</span>: <span class="cv">1.125rem</span>; <span class="cvar">--tx-xl</span>: <span class="cv">1.3rem</span>;   <span class="cvar">--tx-2xl</span>: <span class="cv">1.6rem</span>;
+  <span class="cvar">--tx-3xl</span>: <span class="cv">2.1rem</span>;  <span class="cvar">--tx-4xl</span>: <span class="cv">2.8rem</span>;  <span class="cvar">--tx-hero</span>: <span class="cv">3.8rem</span>;
+
+  <span class="cm">/* SPACING */</span>
+  <span class="cvar">--s1</span>:<span class="cv">4px</span>; <span class="cvar">--s2</span>:<span class="cv">8px</span>; <span class="cvar">--s3</span>:<span class="cv">12px</span>; <span class="cvar">--s4</span>:<span class="cv">16px</span>; <span class="cvar">--s5</span>:<span class="cv">20px</span>;
+  <span class="cvar">--s6</span>:<span class="cv">24px</span>; <span class="cvar">--s8</span>:<span class="cv">32px</span>; <span class="cvar">--s10</span>:<span class="cv">40px</span>; <span class="cvar">--s12</span>:<span class="cv">48px</span>; <span class="cvar">--s16</span>:<span class="cv">64px</span>;
+
+  <span class="cm">/* RADIUS */</span>
+  <span class="cvar">--r-xs</span>:<span class="cv">4px</span>; <span class="cvar">--r-sm</span>:<span class="cv">8px</span>; <span class="cvar">--r-md</span>:<span class="cv">12px</span>;
+  <span class="cvar">--r-lg</span>:<span class="cv">16px</span>; <span class="cvar">--r-xl</span>:<span class="cv">24px</span>; <span class="cvar">--r-full</span>:<span class="cv">9999px</span>;
+
+  <span class="cm">/* SHADOWS */</span>
+  <span class="cvar">--sh-xs</span>:   <span class="cv">0 1px 3px rgba(0,0,0,.06)</span>;
+  <span class="cvar">--sh-sm</span>:   <span class="cv">0 2px 8px rgba(0,0,0,.08)</span>;
+  <span class="cvar">--sh-md</span>:   <span class="cv">0 4px 16px rgba(0,0,0,.10)</span>;
+  <span class="cvar">--sh-glow</span>: <span class="cv">0 0 0 3px rgba(0,193,106,.2)</span>;
+
+  <span class="cm">/* TRANSITIONS */</span>
+  <span class="cvar">--tf</span>: <span class="cv">140ms ease</span>;  <span class="cvar">--tn</span>: <span class="cv">220ms ease</span>;
+}
+  </div>
+  <div style="font-size:var(--tx-xs);color:var(--lt-muted);margin-top:-6px;">Clic en el bloque para copiar todas las variables.</div>
+</section>
+
+</main>
+<div class="toast" id="t">✓ Copiado</div>
+
+<script>
+function show(id,el){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  el.classList.add('on');
+  document.querySelector('.mn').scrollTop=0;
+}
+function toast(msg){const t=document.getElementById('t');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function cpx(hex){navigator.clipboard.writeText(hex).then(()=>toast('✓ '+hex+' copiado'));}
+function cpTokens(){
+  const txt=`:root{--g:#00C16A;--g-dark:#00A359;--g-deep:#007A42;--g-light:#E8F7F0;--g-pale:#F0FBF5;--dk-base:#0C1D15;--dk-surface:#112219;--dk-card:#162D1E;--dk-border:#1F3828;--dk-text:#D8EFE2;--dk-muted:#6B9A7A;--lt-bg:#F5F5F0;--lt-surface:#FFFFFF;--lt-border:#E4E8E3;--lt-border2:#D0D8CC;--lt-text:#1A2B20;--lt-muted:#6B7E6F;--lt-subtle:#F0F4F1;--tag-pdf-bg:#FEF3F2;--tag-pdf-txt:#DC2626;--tag-vid-bg:#FFF7ED;--tag-vid-txt:#D97706;--tag-3d-bg:#F5F3FF;--tag-3d-txt:#7C3AED;--fp:'Plus Jakarta Sans',sans-serif;--fm:'DM Mono',monospace;--tx-xs:.72rem;--tx-sm:.85rem;--tx-base:1rem;--tx-lg:1.125rem;--tx-xl:1.3rem;--tx-2xl:1.6rem;--tx-3xl:2.1rem;--tx-4xl:2.8rem;--tx-hero:3.8rem;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;--r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-full:9999px;--sh-xs:0 1px 3px rgba(0,0,0,.06);--sh-sm:0 2px 8px rgba(0,0,0,.08);--sh-md:0 4px 16px rgba(0,0,0,.10);--sh-glow:0 0 0 3px rgba(0,193,106,.2);--tf:140ms ease;--tn:220ms ease;}`;
+  navigator.clipboard.writeText(txt).then(()=>toast('✓ Tokens CSS copiados'));
+}
+</script>
+</body>
+</html>
